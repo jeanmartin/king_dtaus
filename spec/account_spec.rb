@@ -160,7 +160,7 @@ describe KingDta::Account do
     konto = KingDta::Account.new(
       :account_number =>    @dudes_konto.account_number,
       :bank_number =>       @dudes_konto.bank_number,
-      :client_name =>       @dudes_konto.client_name,
+      :client_name =>       "JAN & KUS",
       :client_number =>     @dudes_konto.client_number,
       :bank_street =>       @dudes_konto.account_street,
       :bank_city =>         @dudes_konto.account_city,
@@ -170,14 +170,14 @@ describe KingDta::Account do
       :client_city =>       @dudes_konto.client_city,
       :client_zip_code =>   @dudes_konto.client_zip_code
     )
-    konto.client_name_1.should == "JAN"
+    konto.client_name_1.strip.should == "JAN"
   end
 
   it "should return sender name1 - the characters 36 - 70 of a name" do
     konto = KingDta::Account.new(
       :account_number =>    @dudes_konto.account_number,
       :bank_number =>       @dudes_konto.bank_number,
-      :client_name =>       @dudes_konto.client_name,
+      :client_name =>       "JAN & KUS",
       :client_number =>     @dudes_konto.client_number,
       :bank_street =>       @dudes_konto.account_street,
       :bank_city =>         @dudes_konto.account_city,
@@ -187,7 +187,7 @@ describe KingDta::Account do
       :client_city =>       @dudes_konto.client_city,
       :client_zip_code =>   @dudes_konto.client_zip_code
     )
-    konto.client_name_2.should == "KUS"
+    konto.client_name_2.strip.should == "KUS"
   end
 
 end

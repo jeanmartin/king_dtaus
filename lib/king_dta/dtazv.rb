@@ -302,17 +302,17 @@ module KingDta
       data2 += '%-035.35s' % booking.account.client_zip_city             # KANN/PFLICHT 10b 4	: Ort
       data2 += '%070s' % ''                                          # KANN/PFLICHT 11 Ordervermerk
       data2 += '/%-034s' % booking.account.account_number              # PFLICHT 12 35 IBAN bzw. Kontonummer des
-      data2 += 'EUR'                                                 # KANN/PFLICHT 13 3 Auftragswährung "EUR"
+      data2 += '%03s' % booking.currency                               # KANN/PFLICHT 13 3 Auftragswährung "EUR"
       data2 += '%014i' % booking.value.divmod(100)[0]                # PFLICHT 14a 14 Betrag (Vorkommastellen) Rechtsbündig
       data2 += '%02i0' % booking.value.divmod(100)[1]                # PFLICHT 14b 3 Betrag (Nachkommastellen) Linksbündig
-      data2 += '%0140s' % booking.text || default_text                          # KANN 15 4x35 Verwendungszweck
+      data2 += '%-0140s' % (booking.text || default_text)                          # KANN 15 4x35 Verwendungszweck
       data2 += "%02i" % 0                                           # N 16 Weisungsschlüssel 1 (gem. Anhang 2)
       data2 += "%02i" % 0                                           # N 17 Weisungsschlüssel 2 (gem. Anhang 2)
       data2 += "%02i" % 0                                           # N 18 Weisungsschlüssel 3 (gem. Anhang 2)
       data2 += "%02i" % 0                                           # N 19 Weisungsschlüssel 4 (gem. Anhang 2 und 2a)
       data2 += '%025s' % ''                                         # N 20 Zusatzinformationen zum Weisungsschlüssel
       data2 += "%02i" % 0                                            # PFLICHT 21 Entgeltregelung
-      data2 += "%02i" % 13                                            # PFLICHT 22 Kennzeichnung der Zahlungsart     Gemäß Anhang 1; Zahlungen, die weder '11' noch '13' als Zahlungsartschlüssel enthalten
+      data2 += "%02i" % (booking.payment_type || 13)                   # PFLICHT 22 Kennzeichnung der Zahlungsart     Gemäß Anhang 1; Zahlungen, die weder '11' noch '13' als Zahlungsartschlüssel enthalten
       data2 += '%027s' % ''                                          # KANN 23 Variabler Text nur für Auftraggeberabrechnung
       # i dont know what to do.
       data2 += '%035s' % ''                                          # KANN/PFLICHT 24 35 Name und Telefonnummer sowie ggf. Stellvertretungsmeldung

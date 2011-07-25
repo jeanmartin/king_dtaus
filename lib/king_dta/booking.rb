@@ -8,13 +8,15 @@ module KingDta
     LASTSCHRIFT_EINZUGSERMAECHTIGUNG = '05000'
     UEBERWEISUNG_GUTSCHRIFT          = '51000'
 
-    attr_accessor :value, :account, :text, :account_key
+    attr_accessor :value, :currency, :account, :text, :account_key, :payment_type
     #Eine Buchung ist definiert durch:
     #- Konto (siehe Klasse Konto
     #- Betrag
     #  Der Betrag kann , oder . als Dezimaltrenner enthalten.
+    #- Währung
+    #  Als 3-stelligen ISO Code (z.B. 'EUR' <- default)
     #- optional Buchungstext
-    def initialize( account, value, text=nil, account_key=nil )
+    def initialize( account, value, currency='EUR', text=nil, account_key=nil )
       raise Exception.new("Hey, a booking should have an Account") unless account.kind_of?( Account )
       @account = account
       @text = text ? convert_text( text ) : text
@@ -36,6 +38,7 @@ module KingDta
         @value = -value
         @pos   = false
       end
+      @currency = currency.upcase
     end
 
     def text=(text)

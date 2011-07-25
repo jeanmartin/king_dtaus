@@ -14,6 +14,11 @@ describe KingDta::Booking do
     booking.value.should == 15973
   end
 
+  it "should have currency 'EUR' if initialized without currency" do
+    booking = KingDta::Booking.new(@account, "159.73")
+    booking.currency.should == 'EUR'
+  end
+
   it "should raise if initialized without an account" do
     lambda{ KingDta::Booking.new("account", Date.today) }.should raise_error(KingDta::Exception)
   end

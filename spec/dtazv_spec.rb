@@ -158,7 +158,7 @@ end
 describe "KingDta::DtazvSegments" do
 
   before :each do
-    @date = Date.today
+    @date = Date.parse('2011-07-11')
     @dudes_dtazv_export = KingDta::Dtazv.new(@date)
     @dudes_konto = dudes_konto
     @dalai_lamas_account = dalai_lamas_account
@@ -192,7 +192,7 @@ describe "KingDta::DtazvSegments" do
       :client_zip_code =>     @dalai_lamas_account.client_zip_code,
       :bank_country_code =>   @dalai_lamas_account.bank_country_code,
       :client_country_code => @dalai_lamas_account.client_country_code
-    ), 220.25)
+    ), 220.25, 'EUR', '')
 
     @bookings = []
     @bookings << @dalai_lamas_booking
@@ -209,7 +209,7 @@ describe "KingDta::DtazvSegments" do
   # end
 
   it "should return the proper Q segment" do
-    @dudes_dtazv_export.add_q.should == "0256Q370502991326049634JAN                                KUS                                MEINE EINE STRASSE 2               51063 MEINE KOELN                  11071101110711N0000000000                                                                    "
+    @dudes_dtazv_export.add_q.should == "0256Q370502991326049634JAN KUS                                                               MEINE EINE STRASSE 2               51063 MEINE KOELN                  11071101110711N0000000000                                                                    "
   end
 
   it "should return the proper length of P segment" do
@@ -217,9 +217,7 @@ describe "KingDta::DtazvSegments" do
   end
 
   it "should return the proper T segment" do
-    @dudes_dtazv_export.add_t(@dalai_lamas_booking).should == "0768T37050299EUR1326049634#{@date.strftime("%y%m%d")}00000000   0000000000MARKF1100                                                                                                                                                 DE DALAI                              LAMA                               BUSH-AVENUE 55                     445555 INDIA                                                                                             /GR1601101250000000012300695       EUR00000000000220250                                                                                                                                            00000000                         0013                                                              0                                                   00"
-
-
+    @dudes_dtazv_export.add_t(@dalai_lamas_booking).should == "0768T37050299EUR1326049634#{@date.strftime("%y%m%d")}00000000   0000000000MARKF1100                                                                                                                                                 DE DALAI LAMA                                                            BUSH-AVENUE 55                     445555 INDIA                                                                                             /GR1601101250000000012300695       EUR00000000000220250                                                                                                                                            00000000                         0013                                                              0                                                   00"
   end
 
   it "should return the proper length of T segment" do

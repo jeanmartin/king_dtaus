@@ -37,11 +37,11 @@ module KingDta
     end
 
     def client_name_1
-      @client_name.split(" ", 2)[0]
+      @client_name.split("&", 2)[0]
     end
 
     def client_name_2
-      @client_name.split(" ", 2)[1]
+      @client_name.split("&", 2)[1]
     end
 
     def zip_city
