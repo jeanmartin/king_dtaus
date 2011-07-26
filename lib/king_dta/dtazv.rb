@@ -291,10 +291,10 @@ module KingDta
       data2 += '%03s' % ''                                           # KANN/PFLICHT 7a ISO-Währungscode
       data2 += '%010i' % 0                                           # KANN/PFLICHT 7b BLZ
       data2 += '%-011s' % booking.account.bank_number                 # KANN/PFLICHT 8 11 Bank Identifier Code (BIC) des Zahlungsdienstleisters des Zahlungsempfängers (AUCH BLZ denke ich)
-      data2 += '%-03s'  % '' #booking.account.bank_country_code           # KANN/PFLICHT 9a 3 Ländercode für den Zahlungsdienstleister des Zahlungsempfängers
-      data2 += '%070s' % ''  #booking.account.bank_name                   # KANN/PFLICHT 9b 4x35 Anschrift des Zahlungsdienstleisters des Zahlungsempfängers - Pflichtfeld wenn T8 nich belegt Zeile 1 und 2:
-      data2 += '%035.35s' % ''  #booking.account.street                      # KANN/PFLICHT 9b Name Zeile 3	: Straße Zeile
-      data2 += '%035.35s' % ''  #booking.account.zip_city                    # KANN/PFLICHT 9b 4	: Ort
+      data2 += '%-03s'  % booking.account.bank_country_code           # KANN/PFLICHT 9a 3 Ländercode für den Zahlungsdienstleister des Zahlungsempfängers
+      data2 += '%070s' % booking.account.bank_name                   # KANN/PFLICHT 9b 4x35 Anschrift des Zahlungsdienstleisters des Zahlungsempfängers - Pflichtfeld wenn T8 nich belegt Zeile 1 und 2:
+      data2 += '%035.35s' % booking.account.bank_street                      # KANN/PFLICHT 9b Name Zeile 3	: Straße Zeile
+      data2 += '%035.35s' % booking.account.zip_city                    # KANN/PFLICHT 9b 4	: Ort
       data2 += '%-03s' % booking.account.client_country_code         # PFLICHT 10a Ländercode für Land des Zahlungsempfängers bzw. Scheckempfängers
       data2 += '%-035.35s' % booking.account.client_name_1                 # KANN/PFLICHT 10b 4x35 Anschrift des Zahlungsdienstleisters des Zahlungsempfängers - Pflichtfeld wenn T8 nich belegt Zeile 1 und 2:
       data2 += '%-035.35s' % booking.account.client_name_2                 # KANN/PFLICHT 10b 4x35 Anschrift des Zahlungsdienstleisters des Zahlungsempfängers - Pflichtfeld wenn T8 nich belegt Zeile 1 und 2:
@@ -311,7 +311,7 @@ module KingDta
       data2 += "%02i" % 0                                           # N 18 Weisungsschlüssel 3 (gem. Anhang 2)
       data2 += "%02i" % 0                                           # N 19 Weisungsschlüssel 4 (gem. Anhang 2 und 2a)
       data2 += '%025s' % ''                                         # N 20 Zusatzinformationen zum Weisungsschlüssel
-      data2 += "%02i" % 0                                            # PFLICHT 21 Entgeltregelung
+      data2 += "%02i" % (booking.charging_scheme || 0)                # PFLICHT 21 Entgeltregelung
       data2 += "%02i" % (booking.payment_type || 13)                   # PFLICHT 22 Kennzeichnung der Zahlungsart     Gemäß Anhang 1; Zahlungen, die weder '11' noch '13' als Zahlungsartschlüssel enthalten
       data2 += '%027s' % ''                                          # KANN 23 Variabler Text nur für Auftraggeberabrechnung
       # i dont know what to do.
