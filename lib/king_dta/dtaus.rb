@@ -158,8 +158,8 @@ module KingDta
       #data1 = '%4i' % ?? #Satzlänge kommt später
       data1 = 'C'
       data1 +=  '%08i' % 0  #freigestellt
-      data1 +=  '%08i' % booking.account.bank_number
-      data1 +=  '%010i' % booking.account.account_number.to_i
+      data1 +=  '%-08i' % booking.account.bank_number
+      data1 +=  '%-010i' % booking.account.account_number.to_i
       # RUBY 1.9 workaround => || 0
       # Ruby 1.9 '0%011i0' % nil => Exception
       # Ruby 1.8 '0%011i0' % nil => "00000000000"
