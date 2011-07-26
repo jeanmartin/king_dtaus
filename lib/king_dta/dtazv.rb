@@ -292,9 +292,9 @@ module KingDta
       data2 += '%010i' % 0                                           # KANN/PFLICHT 7b BLZ
       data2 += '%-011s' % booking.account.bank_number                 # KANN/PFLICHT 8 11 Bank Identifier Code (BIC) des Zahlungsdienstleisters des Zahlungsempfängers (AUCH BLZ denke ich)
       data2 += '%-03s'  % booking.account.bank_country_code           # KANN/PFLICHT 9a 3 Ländercode für den Zahlungsdienstleister des Zahlungsempfängers
-      data2 += '%070s' % booking.account.bank_name                   # KANN/PFLICHT 9b 4x35 Anschrift des Zahlungsdienstleisters des Zahlungsempfängers - Pflichtfeld wenn T8 nich belegt Zeile 1 und 2:
-      data2 += '%035.35s' % booking.account.bank_street                      # KANN/PFLICHT 9b Name Zeile 3	: Straße Zeile
-      data2 += '%035.35s' % booking.account.zip_city                    # KANN/PFLICHT 9b 4	: Ort
+      data2 += '%-070s' % booking.account.bank_name                   # KANN/PFLICHT 9b 4x35 Anschrift des Zahlungsdienstleisters des Zahlungsempfängers - Pflichtfeld wenn T8 nich belegt Zeile 1 und 2:
+      data2 += '%-035.35s' % booking.account.bank_street                      # KANN/PFLICHT 9b Name Zeile 3	: Straße Zeile
+      data2 += '%-035.35s' % booking.account.zip_city                    # KANN/PFLICHT 9b 4	: Ort
       data2 += '%-03s' % booking.account.client_country_code         # PFLICHT 10a Ländercode für Land des Zahlungsempfängers bzw. Scheckempfängers
       data2 += '%-035.35s' % booking.account.client_name_1                 # KANN/PFLICHT 10b 4x35 Anschrift des Zahlungsdienstleisters des Zahlungsempfängers - Pflichtfeld wenn T8 nich belegt Zeile 1 und 2:
       data2 += '%-035.35s' % booking.account.client_name_2                 # KANN/PFLICHT 10b 4x35 Anschrift des Zahlungsdienstleisters des Zahlungsempfängers - Pflichtfeld wenn T8 nich belegt Zeile 1 und 2:
